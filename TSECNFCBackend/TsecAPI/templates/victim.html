@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nirja | Victim Stories</title>
+    <!-- <link rel="stylesheet" href="victim.css"> -->
+    <style>
+        html, body {
+    height: 100%; 
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    font-family: "Inter", sans-serif;
+    background-color: #F8F9FA;
+}
+
+/* Navbar 1 */
+.navbar1 {
+    background-color: #1D3557; 
+    font-weight: bold;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    z-index: 10; 
+}
+
+.navbar1 h1 {
+    font-size: 20px; 
+}
+
+.login-btn {
+    background-color: #E76F51; 
+    color: white;
+    padding: 8px 16px;
+    border-radius: 15px; 
+    border: 1px solid black;
+}
+
+/* Navbar 2 */
+.navbar2 {
+    background-color: #F4F1DE; 
+    color: black;
+    margin-bottom: 20px; /* Adjust margin to separate from content */
+}
+
+.nav-items {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    font-weight: bold;
+}
+
+.nav-items li {
+    cursor: pointer;
+    list-style-type: none;
+}
+.nav-items a{
+    color: black;
+    text-decoration: none;
+}
+.nav-items li:hover {
+    text-decoration: underline;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Cards container styling */
+.cards-container {
+    display: flex;
+    flex-direction: column; 
+    gap: 30px; /* Uniform gap of 30px between cards */
+    padding: 20px; /* Adjust padding for spacing around cards */
+    align-items: center; 
+    justify-content: center;
+}
+
+.card {
+    background-color: #F4F1DE;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #333;
+    font-size: 1.2rem;
+    padding: 1rem;
+    width: 900px; 
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.card-content {
+    display: flex;
+    align-items: center;
+    gap: 30px; /* Space between image and text */
+    width: 100%;
+}
+
+.card:nth-child(odd) .card-content {
+    flex-direction: row; 
+}
+
+.card:nth-child(even) .card-content {
+    flex-direction: row-reverse; 
+}
+
+.card-image {
+    width: 150px; 
+    height: auto; 
+    border-radius: 8px;
+}
+
+.card:nth-child(odd) {
+    background-color: #F4F1DE; 
+    color: #333;
+}
+
+.card:nth-child(even) {
+    background-color: #E76F51; 
+    color: #FFF; 
+}
+
+/* Home icon */
+.home-icon {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 75px;
+    height: 75px;
+    background-color: #E76F51;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+.home-icon i {
+    color: white;
+    font-size: 40px; 
+}
+
+/* Footer */
+.footer {
+    background-color: #1D3557;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+}
+
+.footer li {
+    list-style-type: none;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="navbar1">
+        <h1>Nirja</h1>
+        <button class="login-btn" onclick="window.location.href='login.html';">
+            Admin login
+        </button>
+    </div>
+    <div class="navbar2">
+        <ul class="nav-items">
+            <li class="dropdown"> Awareness Articles
+                <div class="dropdown-content">
+                    <a href="./awarenessPage.html#article1">What is human trafficking?</a>
+                    <a href="./awarenessPage.html#article2">Prevention from human trafficking</a>
+                </div>
+            <li><a href="victim.html">Victim Stories</a></li>
+            <li><a href="chatbot.html">Support Chatbot</a></li>
+            <li><a href="grievances.html">Write your story</a></li>
+            <li><a href="community.html">Communities</a></li>
+        </ul>
+    </div>
+    <div class="cards-container">
+        <div class="card">
+            <div class="card-content">
+                <img src="path/to/image1.jpg" alt="Asha" class="card-image">
+                <p>Asha: Lured away from her village with promises of a good job in the city, 
+                    Asha found herself trapped in a brothel. She endured unimaginable physical and emotional abuse, 
+                    but her unwavering spirit kept her going. Asha clung to the memory of her family and her dreams 
+                    of a better life. She found solace in the companionship of other victims, 
+                    forming a fragile bond that helped them endure their suffering together.</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <p>Ramesh: A young boy from a rural family, Ramesh was tricked into leaving home by a smooth-talking 
+                    stranger who promised him a job in a big city. Instead, he was forced into child labor in a factory, working 
+                    long hours in dangerous conditions for little to no pay. Ramesh's resilience was tested to the limit, but he 
+                    drew strength from his love for his family and his determination to escape his tormentors. He managed to find 
+                    a moment of opportunity and alerted the authorities, leading to his rescue.</p>
+                <img src="path/to/image2.jpg" alt="Ramesh" class="card-image">
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <img src="path/to/image3.jpg" alt="Priya" class="card-image">
+                <p>Priya: A bright and ambitious student, Priya was targeted by a human trafficker who promised her a 
+                    scholarship to study abroad. Upon arrival, she found herself trapped in a forced marriage, isolated from the outside 
+                    world and subjected to constant abuse. Priya's love for learning and her intellectual curiosity became her lifeline. 
+                    She secretly taught herself English, using books and scraps of paper she managed to obtain. With the help of a sympathetic 
+                    teacher, she was able to reach out to a human rights organization and seek their assistance.</p>
+            </div>
+        </div>
+    </div>
+    <div class="home-icon">
+        <a href="{% url 'index' %}">
+            <a href="{% url 'index' %}"><img src='https://i.postimg.cc/TKG9z2Lw/hut.png' style="width: 35px; height: 35px;" alt='hut'/></a>
+    </div>
+    
+    <footer class="footer">
+        <p>Reach us via:</p>
+        <ul class="contact-info">
+            <li>Mob: 9900887654</li>
+            <li>Tel: 2022987651</li>
+            <li>E-mail: nirja.raksha@nirja.com</li>
+        </ul>
+    </footer>
+</html>

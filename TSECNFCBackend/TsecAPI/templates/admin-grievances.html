@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nirja | Admin Grievance Management</title>
+    <!-- <link rel="stylesheet" href="admin-g.css">- -->
+     <style>
+        body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f3f4f6;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.navbar1 {
+    background-color: #1D3557;
+    font-weight: bold;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+.navbar1 h1 {
+    font-size: 27px;
+    position: relative;
+    cursor: pointer;
+}
+
+.navbar1 .dropdown {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    display: none;
+    flex-direction: column;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 10;
+}
+
+.navbar1 .dropdown a {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: black;
+    display: block;
+    border-bottom: 1px solid #ddd;
+}
+
+.navbar1 .dropdown a:hover {
+    background-color: #ddd;
+}
+
+.navbar1:hover .dropdown {
+    display: flex;
+}
+
+.navbar1 .login-btn {
+    background-color: #E76F51;
+    color: #f3f4f6;
+    padding: 10px;
+    border: #1D3557;
+    border-radius: 15px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.main-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 20px 50px;
+}
+
+.main-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 20px 50px;
+}
+
+.grievances-list {
+    flex: 2;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.grievances-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.grievances-list th, .grievances-list td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.grievances-list th {
+    background-color: #E76F51;
+    color: white;
+}
+
+.grievances-list button {
+    padding: 5px 10px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.view-btn {
+    background-color: #007BFF;
+    margin-right: 10px;
+}
+
+.approve-btn {
+    background-color: green;
+    margin-right: 10px;
+}
+
+.decline-btn {
+    background-color: red;
+}
+
+.grievance-details {
+    flex: 1;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    margin-right: 40px;
+}
+
+.home-icon {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 75px;
+    height: 75px;
+    background-color: #E76F51;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+.home-icon i {
+    color: white;
+    font-size: 40px;
+}
+
+.footer {
+    background-color: #1D3557;
+    color: white;
+    font-weight: normal;
+    text-align: center;
+    margin-top: auto;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+.footer li {
+    list-style-type: none;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+}
+
+     </style>
+</head>
+<body>
+
+    <div class="navbar1">
+        <div class="dropdown-wrapper">
+            <h1 id="admin-portal">Nirja - Admin Portal</h1>
+            <div class="dropdown">
+                <li><a href="{% url 'grievances' %}">Write your story</a></li>
+                <a href="{% url 'geolocation-tracker' %}">Geolocation Tracker</a>
+                <a href="{% url 'display-images' %}">CCTV Display</a>
+            </div>
+        </div>
+        <a href="{% url 'loginpage' %}" class="login-btn">Login</a>
+    </div>
+
+    <div class="main-content">
+        <div class="grievances-list">
+            <h2>Manage Grievances</h2>
+            <table id="grievance-table">
+                <thead>
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>Grievance Info</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dynamic rows will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- New Incident Reports Section -->
+        <div class="incident-reports">
+            <h2>Incident Reports</h2>
+            <table id="incident-report-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Location</th>
+                        <th>Description</th>
+                        <th>Contact</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dynamic rows for incident reports will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Add this new section for viewing grievance details -->
+    <div class="grievance-details" id="grievance-details">
+        <h2>Grievance Details</h2>
+        <p id="full-description">Select a grievance to view details.</p>
+    </div>
+
+    <div class="home-icon">
+        <a href="{% url 'index' %}">
+            <a href='index.html'><img src='https://i.postimg.cc/TKG9z2Lw/hut.png' style="width: 35px; height: 35px;" alt='hut'/></a>
+    </div>
+    
+    
+    <footer class="footer">
+        <p>Reach us via:</p>
+        <ul class="contact-info">
+            <li>Mob: 9900887654</li>
+            <li>Tel: 2022987651</li>
+            <li>E-mail: nirja.raksha@nirja.com</li>
+        </ul>
+    </footer>
+
+    <script>// Sample data for grievances
+        const grievances = [
+            { id: 1, info: "I have been a victim of...", fullText: "I have been a victim of human trafficking and need help regarding my legal procedures." },
+            { id: 2, info: "There is a group operating in...", fullText: "There is a group operating in my area, and I suspect illegal activities regarding human trafficking." },
+            { id: 3, info: "My neighbor is involved in...", fullText: "My neighbor is involved in suspicious activities, and I suspect it may be linked to human trafficking." }
+        ];
+        
+        // Function to populate the grievances table
+        function loadGrievances() {
+            const tableBody = document.querySelector("#grievance-table tbody");
+            tableBody.innerHTML = ""; // Clear table
+        
+            grievances.forEach((grievance, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${grievance.info.slice(0, 50)}...</td>
+                    <td>
+                        <button class="view-btn" onclick="viewGrievance(${index})">View</button>
+                        <button class="approve-btn" onclick="approveGrievance(${index})">Approve</button>
+                        <button class="decline-btn" onclick="declineGrievance(${index})">Reject</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+        
+        // Function to view grievance details
+        function viewGrievance(index) {
+            const grievance = grievances[index];
+            document.getElementById('full-description').textContent = grievance.fullText;
+        }
+        
+        // Function to approve a grievance
+        function approveGrievance(index) {
+            alert(`Grievance approved. Details have been sent to the user.`);
+            // Here, you can add code to notify the user via email.
+        }
+        
+        // Function to decline a grievance
+        function declineGrievance(index) {
+            if (confirm("Are you sure you want to reject this grievance?")) {
+                grievances.splice(index, 1); // Remove the grievance from the list
+                loadGrievances(); // Reload the table
+            }
+        }
+        
+        // Function to fetch and display incident reports
+        async function loadIncidentReports() {
+            try {
+                const response = await fetch('/api/incident-reports', { method: 'GET' });
+                if (!response.ok) throw new Error('Failed to fetch incident reports');
+                const reports = await response.json();
+
+                const tableBody = document.querySelector("#incident-report-table tbody");
+                tableBody.innerHTML = ""; // Clear table
+
+                reports.forEach((report, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${report.location}</td>
+                        <td>${report.description}</td>
+                        <td>${report.phone_number}</td>
+                        <td>${report.email}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error loading incident reports:', error);
+            }
+        }
+
+        // Initialize the incident reports table when the page loads
+        window.onload = () => {
+            loadGrievances();
+            loadIncidentReports();
+        };
+    </script>
+</body>
+</html>

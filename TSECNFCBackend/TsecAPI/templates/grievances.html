@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nirja | Grievances and Complaints</title>
+    <!-- <link rel="stylesheet" href="grievances.css"> -->
+     <style>
+        /* grievances.css */
+html, body {
+    height: 100%; /* Ensure the body takes up the full height of the viewport */
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    font-family: "Inter", sans-serif;
+    background-color: #F8F9FA;
+}
+
+/* Navbar 1 */
+.navbar1 {
+    background-color: #1D3557; /* Blue-900 equivalent */
+    font-weight: bold;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    z-index: 10; /* Ensure it appears above other content */
+}
+
+.navbar1 h1 {
+    font-size: 20px; /* Tailwind text-xl */
+}
+
+.login-btn {
+    background-color: #E76F51; /* Orange-600 equivalent */
+    color: white;
+    padding: 8px 16px;
+    border-radius: 15px; /* Tailwind rounded-lg */
+    border: 1px solid black;
+}
+
+/* Navbar 2 */
+.navbar2 {
+    background-color: #F4F1DE; /* Yellow-100 equivalent */
+    color: black;
+    margin-bottom: 20px; /* Adjusted margin */
+}
+
+.nav-items {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    font-weight: bold;
+}
+
+.nav-items li {
+    cursor: pointer;
+    list-style-type: none;
+}
+.nav-items a {
+    color: black;
+    text-decoration: none;
+}
+.nav-items li:hover {
+    text-decoration: underline;
+}
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Main content layout */
+.main-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    gap: 1rem;
+    margin-left: 20px;
+}
+
+.complaint-steps {
+    flex: 1;
+    max-width: 700px; /* Adjust as needed */
+}
+
+.complaint-steps h2 {
+    margin-top: 0;
+}
+
+.complaint-steps ol, .complaint-steps ul {
+    margin: 1rem 0;
+}
+
+.ongoing-cases {
+    width: 300px; /* Fixed width for the ongoing cases section */
+    background-color: #F4F1DE; /* White background */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    margin-right: 20px;
+}
+
+.ongoing-cases h2 {
+    margin-top: 0;
+}
+
+.ongoing-cases ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.ongoing-cases li {
+    margin-bottom: 0.5rem;
+}
+
+/* Grievance form styling */
+.grievance-form {
+    padding: 2rem;
+    background-color: #dedbdb; /* White background */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 1rem auto; /* Centered on the page */
+    max-width: 100%; /* Maximum width for form */
+}
+
+.grievance-form h2 {
+    margin-top: 0;
+}
+
+.grievance-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.grievance-form label {
+    font-weight: bold;
+}
+
+.grievance-form input, .grievance-form textarea {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    min-width: 1000px;
+    box-sizing: border-box;
+}
+
+.grievance-form button {
+    background-color: #1D3557; /* Blue-900 equivalent */
+    color: white;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.grievance-form button:hover {
+    background-color: #123456; /* Darker blue for hover effect */
+}
+
+.home-icon {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 75px;
+    height: 75px;
+    background-color: #E76F51; /* Orange-600 equivalent */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 100; /* Ensure it is above other content */
+}
+
+.home-icon i {
+    color: white;
+    font-size: 40px; /* Adjust icon size if needed */
+}
+
+
+/* Footer */
+.footer {
+    background-color: #1D3557; /* Blue-900 equivalent */
+    color: white;
+    font-weight: normal;
+    /* padding: 2px; */
+    text-align: center;
+    width: 100%; /* Ensure the footer spans the entire width */
+}
+
+.footer li{
+    list-style-type: none;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+}
+
+     </style>
+</head>
+<body>
+    <div class="navbar1">
+        <h1>Nirja</h1>
+        <a href="{% url 'loginpage' %}" class="login-btn">
+            Admin login
+        </a>
+    </div>
+    <div class="navbar2">
+        <ul class="nav-items">
+            <li class="dropdown"> Awareness Articles
+                <div class="dropdown-content">
+                    <a href="./awarenessPage.html#article1">What is human trafficking?</a>
+                    <a href="./awarenessPage.html#article2">Prevention from human trafficking</a>
+                </div>
+            </li>
+            <li><a style="color: black; text-decoration: none;" href="{% url 'victim' %}">Victim Stories</a></li>
+            <li><a style="color: black; text-decoration: none;" href="{% url 'chatbot' %}">Support Chatbot</a></li>
+            <li><a style="color: black; text-decoration: none;" href="{% url 'grievances' %}">Write your story</a></li>
+            <li><a style="color: black; text-decoration: none;" href="{% url 'community' %}">Communities</a></li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <div class="complaint-steps">
+            <h2>Steps to Share Your Human Trafficking Experience</h2>
+            <ol>
+                <li><strong>Step 1:</strong> Gather information by reflecting on your experiences and collecting evidence.</li>
+                <li><strong>Step 2:</strong> Find support by reaching out to trusted individuals or human trafficking support organizations.</li>
+                <li><strong>Step 3:</strong> Decide how to share your story anonymously or publicly, and choose a platform.</li>
+                <li><strong>Step 4:</strong> Submit the form and keep a record of the submission reference.</li>
+                <li><strong>Step 5:</strong> Craft your narrative by focusing on your experiences, using your own voice, and considering the impact.</li>
+                <li><strong>Step 6:</strong> Share your story by publishing your narrative and connecting with others.</li>
+            </ol>
+            <h3>Who Will See Your Story</h3>
+            <p>The stories will be reviewed by:</p>
+            <ul>
+                <li>Human trafficking support organizations</li>
+                <li>Law enforcement agencies</li>
+                <li>Legal professionals and advocacy groups</li>
+            </ul>
+        </div>
+        <div class="ongoing-cases">
+            <h2>Hear from Our Heroes:</h2>
+            <p>Stay informed about the courageous individuals and organizations fighting human trafficking through these ongoing cases.</p>
+            <ul>
+                <li>Case 1: Asha</li>
+                <li>Case 2: Ramesh</li>
+                <li>Case 3: Priya</li>
+                <!-- Add more cases as needed -->
+            </ul>
+        </div>
+    </div>
+    <div class="grievance-form">
+        <h2>Tell your story</h2>
+        <form action="" 
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="phone">Your Phone Number:</label>
+            <input type="tel" id="phone" name="phone">
+            
+            <label for="grievance">Describe Your Story:</label>
+            <textarea id="grievance" name="grievance" rows="6" required></textarea>
+            
+            <button type="submit">Submit Story</button>
+        </form>
+    </div>
+    <div class="home-icon">
+        <a href="{% url 'index' %}">
+            <a href='index.html'><img src='https://i.postimg.cc/TKG9z2Lw/hut.png' style="width: 35px; height: 35px;" alt='hut'/></a>
+    </div>
+    
+    <footer class="footer">
+        <p>Reach us via:</p>
+        <ul class="contact-info">
+            <li>Mob: 9900887654</li>
+            <li>Tel: 2022987651</li>
+            <li>E-mail: nirja.raksha@nirja.com</li>
+        </ul>
+    </footer>
+</body>
+</html>

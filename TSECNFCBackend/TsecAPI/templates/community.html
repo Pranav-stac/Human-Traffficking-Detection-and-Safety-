@@ -1,0 +1,245 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nirja | Community Finder</title>
+    <!-- <link rel="stylesheet" href="community.css"> -->
+     <style>
+        /* community.css */
+html, body {
+    height: 100%; /* Ensure the body takes up the full height of the viewport */
+    margin: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F8F9FA;
+    font-weight: bold;
+    overflow-x: hidden;
+}
+
+/* Navbar 1 */
+.navbar1 {
+    background-color: #1D3557; /* Blue-900 equivalent */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+}
+
+.navbar1 h1 {
+    font-size: 20px;
+}
+
+.login-btn {
+    background-color: #E76F51; /* Orange-600 equivalent */
+    color: white;
+    padding: 8px 16px;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Navbar 2 */
+.navbar2 {
+    background-color: #F4F1DE; /* Yellow-100 equivalent */
+    padding: 10px 0;
+}
+
+.nav-items {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-items li {
+    cursor: pointer;
+    position: relative;
+}
+
+.nav-items a {
+    color: black;
+    text-decoration: none;
+}
+
+.nav-items li:hover {
+    text-decoration: underline;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Card Container */
+.cards-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allows cards to wrap if there is not enough space */
+    gap: 20px; /* Space between cards */
+    padding: 20px;
+}
+
+.card {
+    background-color: #fdb6a5; /* White background for cards */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Ensures the image does not overflow */
+    width: 30%; /* Three cards per row */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+}
+
+.card-image {
+    width: 100%; /* Make the image fill the card width */
+    height: 200px; /* Fixed height for the image */
+    object-fit: cover; /* Ensure the image covers the area without distortion */
+}
+
+.card p {
+    padding: 10px;
+    font-size: 1rem;
+    color: #333;
+}
+/* Circle with Home Icon */
+.home-icon {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 75px;
+    height: 75px;
+    background-color: #E76F51; /* Orange-600 equivalent */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 100; /* Ensure it is above other content */
+}
+
+.home-icon i {
+    color: white;
+    font-size: 40px; /* Adjust icon size if needed */
+}
+
+/* Footer */
+.footer {
+    background-color: #1D3557; /* Blue-900 equivalent */
+    color: white;
+    font-weight: normal;
+    padding: 2px;
+    text-align: center;
+    width: 100%; /* Ensure the footer spans the entire width */
+    transform: translateY(35px);
+}
+
+.footer li{
+    list-style-type: none;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+}
+
+     </style>
+</head>
+<body>
+    <div class="navbar1">
+        <h1>Nirja</h1>
+        <a href="{% url 'loginpage' %}" class="login-btn">
+            Admin login
+        </a>
+    </div>
+    <div class="navbar2">
+        <ul class="nav-items">
+            <li class="dropdown"> Awareness Articles
+                <div class="dropdown-content">
+                    <a href="{% url 'awareness_page' %}">What is human trafficking?</a>
+                    <a href="{% url 'awareness_page' %}">Prevention from human trafficking</a>
+                </div>
+            </li>
+            <li><a href="{% url 'victim' %}">Victim Stories</a></li>
+            <li><a href="{% url 'chatbot' %}">Support Chatbot</a></li>
+            <li><a href="{% url 'grievances' %}">Write your story</a></li>
+            <li><a href="{% url 'community' %}">Communities</a></li>
+        </ul>
+    </div>
+    
+    <div class="cards-container">
+        <div class="card">
+            <a><img src='https://i.postimg.cc/XrdzSDYj/comm1.jpg' border='0' style="width: 90%; height: 150px; margin-left: 10px; margin-top: 20px; " alt='comm1'/></a>
+            <p style="font-weight: bold; text-align: center;">Shakti Vahini</p>
+                <p style="transform: translateY(-20px);">Focus: Shakti Vahini works to prevent and combat human trafficking, particularly in rural areas.
+                <br>Approach: They conduct awareness campaigns, rescue victims, and provide rehabilitation services.
+                <br>Impact: Shakti Vahini has been successful in raising awareness about human trafficking and providing critical support to victims.
+                <br><p>Contact us: 3334099211</p>
+            </p>
+        </div>
+        <div class="card">
+            <a><img src='https://i.postimg.cc/Hch27Qkv/comm2.jpg' style="width: 90%; height: 150px; margin-left: 10px; margin-top: 20px; " border='0' alt='comm2'/></a>
+            <p>Prajwala</p>
+            <p>
+                Focus: Prajwala is dedicated to rescuing and rehabilitating victims of sex trafficking and forced labor.
+                <br>Approach: They offer a range of services, including shelter, medical care, education, and vocational training.
+                <br>Impact: Prajwala has a strong track record of rescuing victims, providing them with essential support, and advocating for their rights.
+                <br><p style="transform: translateY(-10px);">Contact us: 2983745610</p></p>
+        </div>
+        <div class="card">
+            <a><img src='https://i.postimg.cc/dkp20w5z/comm3.jpg' style="width: 90%; height: 150px; margin-left: 10px; margin-top: 20px; " border='0' alt='comm3'/></a>
+            <p style="text-align: center;">The Global March Against Child Labor:</p>
+                <p>
+                GMA is a global network that works to end child labor worldwide. While their primary focus is on child labor, 
+                they also address related issues such as human trafficking and forced labor that can affect adult men. GMA works 
+                with governments, NGOs, and communities to raise awareness, advocate for policy change, and provide direct support to victims.
+                <br><p>Contact us: 8798330981</p>
+            </p>
+        </div>
+    </div>
+    <div class="home-icon">
+        <a href="{% url 'index' %}">
+            <a href='index.html'><img src='https://i.postimg.cc/TKG9z2Lw/hut.png' style="width: 35px; height: 35px;" alt='hut'/></a>
+    </div>
+    
+    <footer class="footer">
+        <p>Reach us via:</p>
+        <ul class="contact-info">
+            <li>Mob: 9900887654</li>
+            <li>Tel: 2022987651</li>
+            <li>E-mail: nirja.raksha@nirja.com</li>
+        </ul>
+    </footer>
+</body>
+</html>

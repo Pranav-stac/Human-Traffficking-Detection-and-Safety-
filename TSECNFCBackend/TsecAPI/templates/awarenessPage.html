@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nirja | Awareness Articles</title>
+    <!-- <link rel="stylesheet" href="ap.css"> -->
+     <style>
+        html, body {
+    height: 100%; /* Ensure the body takes up the full height of the viewport */
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    font-family: "Inter", sans-serif;
+    background-color: #F8F9FA;
+    scroll-behavior: smooth;
+}
+
+/* Navbar 1 */
+.navbar1 {
+    background-color: #1D3557; /* Blue-900 equivalent */
+    font-weight: bold;
+    color: white;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    position: fixed;
+}
+
+.navbar1 h1 {
+    font-size: 20px; /* Tailwind text-xl */
+}
+
+.login-btn {
+    background-color: #E76F51; /* Orange-600 equivalent */
+    color: white;
+    padding: 8px 16px;
+    border-radius: 15px; /* Tailwind rounded-lg */
+    border: 1px solid black;
+    margin-right: 50px;
+}
+
+/* Navbar 2 */
+.navbar2 {
+    background-color: #F4F1DE;
+    text-align: center;
+    padding: 16px;
+    position: fixed;
+    width: 100%;
+    top: 60px; /* Adjust based on the height of the fixed navbar1 */
+    z-index: 9; /* Ensure it is below the navbar1 but above the main content */
+}
+
+.nav-items {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-items li {
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    position: relative; /* Needed for dropdown positioning */
+}
+
+.nav-items li:hover {
+    text-decoration: underline;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Title */
+.title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 80px; /* Space for fixed navbar2 */
+    margin-bottom: 20px;
+}
+
+/* Layout Container */
+.container {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px; /* Keep a consistent padding at the top */
+}
+
+.left, .right {
+    background-color: #F4F1DE; /* Light yellow color */
+    width: 200px; /* Fixed width */
+    padding: 15px;
+    border-radius: 20px;
+    position: fixed; /* Fix the position */
+    height: auto; /* Allow height to adjust based on content */
+    overflow-y: auto; /* Add scrolling if content exceeds height */
+    top: auto; /* Removed top fixed positioning */
+}
+
+.left {
+    left: 20px; /* Fix the left section on the left */
+    top: 160px; /* Align with the middle section */
+    margin-right: 30px;
+    
+    position: fixed;
+    margin-bottom: 40px;
+}
+
+.right {
+    right: 20px; /* Fix the right section on the right */
+    top: 160px; /* Align with the middle section */
+    margin-left: 30px;
+}
+
+.middle {
+    background-color: #f5f5f5;
+    width: 660px; /* Adjusted to fit between left and right with a 20px gap */
+    max-width: 1000px;
+    padding: 15px;
+    border-radius: 10px;
+    margin-left: 240px; /* 200px (left width) + 20px gap */
+    margin-right: 240px; /* 200px (right width) + 20px gap */
+    overflow-y: auto;
+    min-height: 100vh; /* Ensure middle fills available space */
+    padding-top: 40px; /* Keep this as is for top alignment */
+}
+.middle1 {
+    background-color: #f5f5f5;
+    width: 660px; /* Adjusted to fit between left and right with a 20px gap */
+    max-width: 1000px;
+    padding: 15px;
+    border-radius: 10px;
+    margin-left: 240px; /* 200px (left width) + 20px gap */
+    margin-right: 240px; /* 200px (right width) + 20px gap */
+    overflow-y: auto;
+    min-height: 100vh; /* Ensure middle fills available space */
+    padding-top: 40px; /* Keep this as is for top alignment */
+    margin-top: 20px;
+    margin-left: 27%;
+    margin-bottom: 20px;
+}
+.recommendations ul {
+    list-style: none;
+    padding: 0;
+}
+
+.recommendations li {
+    margin-bottom: 10px;
+}
+
+.recommendations a {
+    text-decoration: none;
+    color: #1D3557; /* Link color */
+}
+
+.recommendations a:hover {
+    text-decoration: underline;
+}
+
+.home-icon {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 75px;
+    height: 75px;
+    background-color: #E76F51; /* Orange-600 equivalent */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 100; /* Ensure it is above other content */
+}
+
+.home-icon i {
+    color: white;
+    font-size: 40px; /* Adjust icon size if needed */
+}
+
+.footer {
+    background-color: #1D3557; /* Blue-900 equivalent */
+    color: white;
+    font-weight: normal;
+    /* padding: 2px; */
+    text-align: center;
+    width: 100%; /* Ensure the footer spans the entire width */
+}
+
+.footer li{
+    list-style-type: none;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+}
+
+     </style>
+</head>
+<body>
+    <div class="navbar1">
+        <h1>Nirja</h1>
+        <a href="{% url 'loginpage' %}" class="login-btn">
+            Admin login
+        </a>
+    </div>
+
+    <div class="navbar2">
+        <ul class="nav-items">
+            <li class="dropdown">
+                Awareness Articles
+                <div class="dropdown-content">
+                    <a href="./awarenessPage.html#article1">What is human trafficking?</a>
+                    <a href="./awarenessPage.html#article2">Prevention from human trafficking</a>
+                </div>
+            </li>
+           
+            <li><a style="color: black; text-decoration: none;" href="{% url 'victim' %}">Victim Stories</a></li>
+            <li><a style="color: black; text-decoration: none;" href="{% url 'chatbot' %}">Support Chatbot</a></li>
+            <li><a style="color: black; text-decoration: none;" href="{% url 'admin-grievances' %}">Write your story</a></li>
+            <li><a style="color: black; text-decoration: none;" href="{% url 'community' %}">Communities</a></li>
+        </ul>
+    </div>
+
+    <div class="title">What is human trafficking?</div>
+
+    <div class="container">
+        <div class="left">
+            <h2>Appendix</h2>
+            <p>Article 1:Introduction</p>
+            <p>Appendix A: Key Definitions and Terms</p>
+            <p>Exploitation</p>
+            <p>Forced labor</p>
+            <p>Organ removal</p>
+            <p>Article 2: Introduction</p>
+            <p>Raising Awareness</p>
+            <p>Supporting Vulnerable Groups</p>
+        </div>
+
+        <div id="article1" class="middle">
+            <h2>What is Human Trafficking?</h2>
+            <p>Human trafficking is a heinous crime that involves the exploitation of individuals for profit. It is a form of modern-day slavery that robs people of their freedom, dignity, and human rights. Victims of human trafficking are often lured into false promises of better opportunities, only to find themselves trapped in forced labor, sexual exploitation, or other forms of exploitation.</p>
+            <p>The perpetrators of human trafficking are often organized crime groups that operate on a global scale. They use deception, coercion, and violence to control their victims and extract maximum profit. Human trafficking is a complex issue with devastating consequences for individuals and societies alike. It requires a concerted effort from governments, law enforcement agencies, and civil society organizations to combat this scourge and ensure the protection of human rights.</p>
+            <p>Exploitation in the context of human trafficking refers to the use of a person for profit, often against their will or consent. It can take various forms, including:</p><br>
+            <ul><li>Forced labor: Any work or service performed under threat of penalty or deprivation. This can include situations where individuals are coerced into working long hours in dangerous conditions for little or no pay.</li><br>
+                <li>Organ removal: The removal of human organs for profit, often against the victim's will. This is a particularly heinous form of exploitation that can have devastating physical and psychological consequences.</li></ul>
+        </div>
+
+        <div class="right recommendations">
+            <h2>Similar Reads</h2>
+            <ul>
+                <li><a href="{% url 'chatbot' %}">Understanding Modern Slavery</a></li>
+                <li><a href="{% url 'chatbot' %}">Combating Human Trafficking</a></li>
+                <li><a href="{% url 'chatbot' %}">Human Rights and Trafficking</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="article2" class="middle1">
+        <h2>Prevention from Human Trafficking</h2>
+        <p>Preventing human trafficking requires a multifaceted approach that involves communities, governments, law enforcement agencies, and individuals. Efforts to prevent human trafficking focus on raising awareness, enhancing enforcement of anti-trafficking laws, and protecting vulnerable populations from exploitation.</p>
+        <p>Here are some key prevention strategies:</p>
+        <ul>
+            <li><strong>Raising Awareness:</strong> Education and awareness campaigns are crucial to prevent human trafficking. Communities need to be informed about the tactics traffickers use, and individuals should know their rights and how to recognize trafficking situations.</li>
+            <li><strong>Supporting Vulnerable Groups:</strong> Many victims of human trafficking come from vulnerable populations. Providing support to these groups through economic opportunities, education, and access to healthcare can reduce the risk of trafficking.</li>
+            <li><strong>Stricter Law Enforcement:</strong> Governments need to enforce stricter laws to combat traffickers and protect victims. Collaboration between international law enforcement agencies is essential in addressing the global nature of trafficking.</li>
+            <li><strong>Community Watch Programs:</strong> Communities can organize watch programs that help monitor for suspicious activities, report potential trafficking cases, and provide a support network for individuals who may be at risk.</li>
+            <li><strong>Public and Private Sector Collaboration:</strong> Businesses and governments must work together to prevent trafficking. This includes ensuring that supply chains are free from forced labor and exploitation and implementing policies to safeguard workers' rights.</li>
+        </ul>
+        <p>By working together, we can make significant progress in preventing human trafficking and ensuring that individuals and communities remain safe from this grave violation of human rights.</p>
+    </div>
+
+    <div class="right recommendations">
+        <h2>Similar Reads</h2>
+        <ul>
+            <li><a href="{% url 'chatbot' %}">Understanding Modern Slavery</a></li>
+            <li><a href="{% url 'chatbot' %}">Combating Human Trafficking</a></li>
+            <li><a href="{% url 'chatbot' %}">Human Rights and Trafficking</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="home-icon">
+    <a href="{% url 'index' %}">
+        <a href='index.html'><img src='https://i.postimg.cc/TKG9z2Lw/hut.png' style="width: 35px; height: 35px;" alt='hut'/></a>
+</div>
+
+
+    <footer class="footer">
+        <p>Reach us via:</p>
+        <ul class="contact-info">
+            <li>Mob: 9900887654</li>
+            <li>Tel: 2022987651</li>
+            <li>E-mail: nirja.raksha@nirja.com</li>
+        </ul>
+    </footer>
+</body>
+</html>

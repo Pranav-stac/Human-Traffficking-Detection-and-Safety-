@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nirja | Support Chatbot</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: "Inter", sans-serif;
+            background-color: white; /* Changed to white */
+            overflow: hidden;
+        }
+
+        /* Navbar 1 */
+        .navbar1 {
+            background-color: #1D3557; /* Blue-900 equivalent */
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            z-index: 10; /* Ensure it appears above other content */
+        }
+
+        .navbar1 h1 {
+            font-size: 20px; /* Tailwind text-xl */
+        }
+
+        .login-btn {
+            background-color: #E76F51; /* Orange-600 equivalent */
+            color: white;
+            padding: 8px 16px;
+            border-radius: 15px; /* Tailwind rounded-lg */
+            border: 1px solid black;
+        }
+
+        /* Navbar 2 */
+        .navbar2 {
+            background-color: #F4F1DE; /* Light yellow background */
+            color: black;
+        }
+
+        .nav-items {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            font-weight: bold;
+        }
+
+        .nav-items li {
+            cursor: pointer;
+            list-style-type: none;
+        }
+
+        .nav-items a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .nav-items li:hover {
+            text-decoration: underline;
+        }
+
+        /* Chatbot Layout */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            height: 100%;
+            padding: 20px;
+            background-color: white; /* White background for the chat area */
+        }
+
+        .chat-box {
+            width: 80%;
+            height: 70%;
+            background-color: rgb(232, 232, 232);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .chat-message {
+            background-color: #1D3557; /* Blue background */
+            color: white;
+            padding: 10px;
+            border-radius: 15px;
+            max-width: 70%;
+        }
+
+        /* Input Area */
+        .chat-input-container {
+            width: 80%;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .chat-input {
+            width: 90%;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .send-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            transform: translateY(5px);
+        }
+
+        .send-btn img {
+            width: 25px;
+            height: 25px;
+        }
+
+        /* Home Icon */
+        .home-icon {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 75px;
+            height: 75px;
+            background-color: #E76F51;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .home-icon img {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const sendButton = document.querySelector('.send-btn');
+            const chatInput = document.querySelector('.chat-input');
+            const chatBox = document.querySelector('.chat-box');
+
+            sendButton.addEventListener('click', function() {
+                const message = chatInput.value;
+                if (message) {
+                    sendMessage(message);
+                    chatInput.value = ''; // Clear input after sending
+                }
+            });
+
+            function sendMessage(message) {
+                fetch('/chat_view/', { // Ensure the URL ends with a slash
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken') // Handle CSRF token
+                    },
+                    body: JSON.stringify({ message: message })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    displayMessage(data.text, 'bot');
+                })
+                .catch(error => console.error('Error:', error));
+            }
+
+            function displayMessage(message, sender) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('chat-message', sender);
+                messageElement.textContent = message;
+                chatBox.appendChild(messageElement);
+            }
+
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar1">
+        <h1>Nirja</h1>
+        <button class="login-btn" onclick="window.location.href='login.html';">
+            Admin login
+        </button>
+    </div>
+
+    <!-- Secondary Navbar -->
+    <div class="navbar2">
+        <ul class="nav-items">
+            <li><a href="{% url 'awareness_page' %}">Awareness Articles</a></li>
+            <li><a href="{% url 'victim' %}">Victim Stories</a></li>
+            <li><a href="{% url 'chatbot' %}">Support Chatbot</a></li>
+            <li><a href="{% url 'grievances' %}">Write your story</a></li>
+            <li><a href="{% url 'community' %}">Communities</a></li>
+        </ul>
+    </div>
+
+    <!-- Chatbot Container -->
+    <div class="chat-container">
+        <div class="chat-box">
+            <!-- Add chat messages dynamically here -->
+        </div>
+
+        <!-- Input Area -->
+        <div class="chat-input-container">
+            <input type="text" class="chat-input" placeholder="Type your message..." />
+            <button class="send-btn">
+                <a><img src='https://i.postimg.cc/VrLMg5hy/send.png' border='0' alt='send'/></a>
+            </button>
+        </div>
+    </div>
+
+    <!-- Home Icon -->
+    <div class="home-icon">
+        <a href="{% url 'index' %}">
+            <a href='index.html'><img src='https://i.postimg.cc/TKG9z2Lw/hut.png' style="width: 35px; height: 35px;" alt='hut'/></a>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Display</title>
+</head>
+<body>
+    
+    <div id="image-container">
+        {% for image_url in images %}
+            <img src="{{ image_url }}" alt="Image">
+        {% endfor %}
+    </div>
+    <script>
+        function refreshImages() {
+            fetch(window.location.href)
+                .then(response => response.json())
+                .then(data => {
+                    const imageContainer = document.getElementById('image-container');
+                    imageContainer.innerHTML = '';
+                    data.images.forEach(image_url => {
+                        const img = document.createElement('img');
+                        img.src = image_url;
+                        img.alt = 'Image';
+                        imageContainer.appendChild(img);
+                    });
+                })
+                .catch(err => console.error('Failed to refresh images:', err));
+        }
+
+        // Refresh images every 5 seconds
+        setInterval(refreshImages, 5000);
+    </script>
+</body>
+</html>

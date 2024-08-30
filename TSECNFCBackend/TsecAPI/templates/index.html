@@ -1,0 +1,241 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nirja.gov.in</title>
+    <!-- <link href="index1.css" rel="stylesheet">  -->
+     <style>
+        /* General Styles */
+html, body {
+    height: 100%; /* Ensure the body takes up the full height of the viewport */
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-x: hidden;
+    font-family: "Inter", sans-serif;
+    background-color: #F8F9FA;
+}
+
+/* Navbar 1 */
+.navbar1 {
+    background-color: #1D3557; /* Blue-900 equivalent */
+    font-weight: bold;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    z-index: 10; /* Ensure it appears above other content */
+}
+
+.navbar1 h1 {
+    font-size: 20px; /* Tailwind text-xl */
+}
+
+.login-btn {
+    background-color: #E76F51; /* Orange-600 equivalent */
+    color: white;
+    padding: 8px 16px;
+    border-radius: 15px; /* Tailwind rounded-lg */
+    border: 1px solid black;
+}
+
+/* Navbar 2 */
+.navbar2 {
+    background-color: #F4F1DE; /* Yellow-100 equivalent */
+    color: black;
+    /* padding: 16px; */
+}
+
+.nav-items {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    font-weight: bold;
+}
+
+.nav-items li {
+    cursor: pointer;
+    list-style-type: none;
+}
+ .nav-items a{
+    color: black;
+    text-decoration: none;
+ }
+.nav-items li:hover {
+    text-decoration: underline;
+}
+
+/* Main Content */
+.content {
+    padding: 24px;
+    flex-grow: 1;
+}
+.image-container {
+    width: 600px; /* Increase the width of the container */
+    height: 600px; /* Increase the height of the container */
+    margin-left: auto; /* Align the container to the right */
+    margin-right: 0; /* Ensure it sticks to the right */
+    display: flex; /* Use flexbox to align the image */
+    justify-content: center; /* Center the image horizontally in the container */
+    align-items: center; /* Center the image vertically in the container */
+}
+.image-container img {
+    max-width: 100%; /* Ensure the image does not exceed the container's width */
+    max-height: 100%; /* Ensure the image does not exceed the container's height */
+    width: 80%; /* Adjust the percentage to control image size */
+    height: 100%; /* Maintain aspect ratio */
+}
+
+
+.content h1 {
+    color: #2A9D8F;
+    margin-left: 32px;
+    width: 50%;
+    font-size: 1.875rem; /* Tailwind text-3xl */
+    font-weight: bold;
+}
+
+.content h3 {
+    color: #E76F51;
+    margin-top: -20px;
+    margin-left: 32px;
+    width: 50%;
+    font-size: 1.875rem; /* Tailwind text-3xl */
+    font-weight: bold;
+}
+
+.content p {
+    color: black;
+    margin-left: 32px;
+    width: 50%;
+    font-size: 20px;
+    margin-top: -10px;
+}
+
+/* Button Styles */
+.download {
+    display: flex;
+    margin-left: 130px;
+    gap: 16px; /* Space between the buttons */
+    margin-top: 20px; /* Adjust margin as needed */
+}
+
+#btn1, #btn2 {
+    background-color: #1D3557; /* Blue color used in the webpage */
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px; /* Rounded corners */
+    text-align: center;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 80px;
+    border: 3px solid #F4F1DE;
+}
+
+/* Ensure proper alignment for the buttons */
+.download button {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Circle with Home Icon */
+.home-icon {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 75px;
+    height: 75px;
+    background-color: #E76F51; /* Orange-600 equivalent */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 100; /* Ensure it is above other content */
+}
+
+.home-icon i {
+    color: white;
+    font-size: 40px; /* Adjust icon size if needed */
+}
+
+
+/* Footer */
+.footer {
+    background-color: #1D3557; /* Blue-900 equivalent */
+    color: white;
+    font-weight: normal;
+    /* padding: 2px; */
+    text-align: center;
+    width: 100%; /* Ensure the footer spans the entire width */
+}
+
+.footer li{
+    list-style-type: none;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+}
+
+     </style>
+</head>
+<body>
+    <div class="navbar1">
+        <h1>Nirja</h1>
+        <a href="{% url 'loginpage' %}" class="login-btn">
+            Admin login
+        </a>
+    </div>
+
+    <div class="navbar2">
+        <ul class="nav-items">
+            <li><a href="{% url 'awareness_page' %}">Awareness Page</a></li>
+            <li><a href="{% url 'victim' %}"> Victim Stories</a></li>
+            <li><a href="{% url 'chatbot' %}">Chatbot</a></li>
+            <li><a href="{% url 'grievances' %}">Write your story</a></li>
+            <li><a href="{% url 'community' %}">Communities</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <h1>Nirja</h1>
+        <h3>“A New Dawn for a Just India.”</h3>
+        <p>With Nirja, we aim to empower victims, ignite this spark within ourselves, 
+            and stand united against the chains of human trafficking.</p>
+        </div>
+            <div class="image-container">
+            <a><img src='https://i.postimg.cc/NyRbSyb5/Mobile-Mockup-removebg-preview.png' border='0' alt='Mobile-Mockup-removebg-preview'/></a>
+        </div>
+
+    <div class="download">
+        <button id="btn1">Get it on:<br>Google Playstore</button>
+        <button id="btn2">Get it on:<br>iOS Appstore</button>
+    </div>
+
+    <div class="home-icon">
+        <a href="{% url 'index' %}">
+            <a href='index.html'><img src='https://i.postimg.cc/TKG9z2Lw/hut.png' style="width: 35px; height: 35px;" alt='hut'/></a>
+    </div>
+    
+    <footer class="footer">
+        <p>Reach us via:</p>
+        <ul class="contact-info">
+            <li>Mob: 9900887654</li>
+            <li>Tel: 2022987651</li>
+            <li>E-mail: nirja.raksha@nirja.com</li>
+        </ul>
+    </footer>
+
+</body>
+</html>

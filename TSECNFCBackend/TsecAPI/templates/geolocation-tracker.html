@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geolocation Tracker</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: "Inter", sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            background-color: #F8F9FA;
+        }
+
+        /* Navbar Styling */
+        .navbar1 {
+    background-color: #1D3557;
+    font-weight: bold;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+.navbar1 h1 {
+    font-size: 27px;
+    position: relative;
+    cursor: pointer;
+}
+
+.navbar1 .dropdown {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    display: none;
+    flex-direction: column;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 10;
+}
+
+.navbar1 .dropdown a {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: black;
+    display: block;
+    border-bottom: 1px solid #ddd;
+}
+
+.navbar1 .dropdown a:hover {
+    background-color: #ddd;
+}
+
+.navbar1:hover .dropdown {
+    display: flex;
+}
+
+.navbar1 button {
+    background-color: #E76F51;
+    color: #f3f4f6;
+    padding: 10px;
+    border: #1D3557;
+    border-radius: 15px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+        /* Main content: Map section */
+        #map-container {
+            flex-grow: 1;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar1">
+        <div class="dropdown-wrapper">
+            <h1 id="admin-portal">Nirja - Admin Portal</h1>
+            <div class="dropdown">
+                <li><a href="{% url 'admin-grievances' %}">Admin Grievances</a></li>
+                <a href="{% url 'geolocation-tracker' %}">Geolocation Tracker</a>
+                <a href="{% url 'display-images' %}">CC Display</a>
+            </div>
+        </div>
+        <a href="{% url 'loginpage' %}" class="login-btn">Logout</a>
+    </div>
+
+    <!-- Map Section -->
+    <div id="map-container">
+        <div id="map"></div>
+    </div>
+
+    <!-- Google Maps API -->
+    <script>
+        function initMap() {
+            var mapOptions = {
+                center: { lat: 19.075984, lng: 72.877656 }, // Default to Mumbai
+                zoom: 10
+            };
+
+            var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+            // SOS data plotting
+            var sosData = JSON.parse('{{ sos_data|safe }}');  // Correctly parse the JSON string
+            sosData.forEach(function(item) {
+                var sos = item.fields;  // Access fields property of each item
+                var marker = new google.maps.Marker({
+                    position: { lat: parseFloat(sos.latitude), lng: parseFloat(sos.longitude) },
+                    map: map,
+                    title: 'SOS from ' + sos.email
+                });
+
+                // Add click event listener to marker
+                marker.addListener('click', function() {
+                    map.setZoom(15);  // Zoom in
+                    map.setCenter(marker.getPosition());  // Center the map on the marker
+                    // Optionally show an info window or alert with the email
+                    alert('SOS from: ' + sos.email);
+                });
+            });
+        }
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTqBgxjbr0SP1ZI8HX8ikLHe-Wo7JszmM&callback=initMap">
+    </script>
+
+</body>
+</html>
